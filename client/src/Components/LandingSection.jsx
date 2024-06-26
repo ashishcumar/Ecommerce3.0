@@ -17,7 +17,7 @@ function LandingSection() {
         backgroundImage: `url(${heroSectionImg})`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-        minHeight: "80vh",
+        minHeight:[ "50vh","80vh"],
         backgroundPosition: "center",
         placeContent: "center",
         textAlign: "center",

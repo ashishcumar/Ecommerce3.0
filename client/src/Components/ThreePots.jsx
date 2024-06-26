@@ -5,9 +5,9 @@ function ThreePots() {
   return (
     <Grid
       sx={{
-        padding: "48px",
+        padding: ["24px", "48px"],
         placeContent: "center",
-        gridTemplateColumns: ['1fr',"repeat(3,1fr)"],
+        gridTemplateColumns: ["1fr", "repeat(3,1fr)"],
         gap: "24px",
       }}
     >
@@ -36,17 +36,17 @@ function ThreePots() {
                 width: "80%",
                 margin: "auto",
                 position: "absolute",
-                left:0,
-                right:0,
-                bottom:10,
-                background:'white',
+                left: 0,
+                right: 0,
+                bottom: 10,
+                background: "white",
                 fontWeight: "600",
                 fontSize: "24px",
-                textAlign:'center',
-                padding:'8px 0'
+                textAlign: "center",
+                padding: "8px 0",
               }}
             >
-             {data.name}
+              {data.name}
             </Text>
           </Box>
         );

@@ -39,11 +39,11 @@ function Cart() {
     }
   };
 
-
   const getCartItems = async () => {
+    console.log("account ->", account);
     try {
       let cartArr = [];
-      console.log("getCartItems called");
+      console.log("getCartItems called", { hasCartItems, account });
       for (let i = 0; i < hasCartItems; i++) {
         const data = await contract.cartList(account, i);
         const newObj = {};
@@ -68,6 +68,7 @@ function Cart() {
         totalAmount += prod.count * prod.item.cost;
       });
       setCartTotal(totalAmount);
+      console.log("cartArr", cartArr);
       setCartItems(cartArr);
     } catch (error) {
       console.log("getCartItems --> error", error);
@@ -89,7 +90,7 @@ function Cart() {
         value: ethers.parseEther(cartTotal.toString()),
         gasLimit: 5000000,
       });
-      if(transaction){
+      if (transaction) {
         showToast({
           title: "Success!",
           description: "Transaction Successful",
@@ -99,7 +100,6 @@ function Cart() {
         });
         getCartData(contract);
       }
-       
     } catch (error) {
       console.log(error);
     }
@@ -117,7 +117,7 @@ function Cart() {
 
   console.log({ cartItems, cartTotal, hasCartItems });
   return (
-    <Grid sx={{ padding: "48px", background: shades.secondary }}>
+    <Grid sx={{ padding: ["24px", "48px"], background: shades.secondary }}>
       <Text
         sx={{
           fontSize: "28px",

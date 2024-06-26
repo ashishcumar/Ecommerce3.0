@@ -1,12 +1,11 @@
 import React from "react";
-import { Grid, Box, Text, Flex } from "@chakra-ui/react";
+import { Grid, Box, Text, Flex, Stack, Skeleton } from "@chakra-ui/react";
 import { shades } from "../helper/shades";
 import PlantCard from "./PlantCard";
 import { useSelector } from "react-redux";
 
 function FreshAndGreen() {
   const products = useSelector((state) => state.contractSlice?.products);
-  // console.log("contractReducer", state);
   return (
     <Grid
       id="freshAndGreen"
@@ -39,7 +38,21 @@ function FreshAndGreen() {
             return <PlantCard card={item} key={item} />;
           })}
         </Grid>
-      ) : null}
+      ) : (
+        <Grid
+          sx={{
+            gridTemplateColumns: ["1fr", "1fr 1fr 1fr 1fr"],
+            gap: "24px",
+            placeContent: "center",
+          }}
+        >
+          {Array.from(Array(4)).map((_, i) => {
+            return (
+              <Skeleton height="450px" width="320px" sx={{ margin: "auto" }} />
+            );
+          })}
+        </Grid>
+      )}
     </Grid>
   );
 }

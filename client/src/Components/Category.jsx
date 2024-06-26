@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Select, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, Select, Skeleton, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { shades } from "../helper/shades";
@@ -28,11 +28,13 @@ function Category({ type }) {
   };
 
   useEffect(() => {
-    updateArrBySortingAndFiltering();
+    if (products?.length) {
+      updateArrBySortingAndFiltering();
+    }
   }, [sortBy]);
 
   return (
-    <Grid sx={{ padding: "48px", background: shades.secondary }}>
+    <Grid sx={{ padding: ["24px", "48px"], background: shades.secondary }}>
       <Text
         sx={{
           fontSize: "36px",
@@ -73,15 +75,19 @@ function Category({ type }) {
             sx={{
               marginTop: "24px",
               padding: "16px",
-              gridTemplateColumns: "repeat(4,1fr)",
+              gridTemplateColumns: ["repeat(1,1fr)", "repeat(4,1fr)"],
               gap: "24px",
             }}
           >
-            {productList
-              ?.filter((item) => item.category === typeMapping[type])
-              .map((card) => {
-                return <PlantCard card={card} />;
-              })}
+            {productList?.length
+              ? productList
+                  ?.filter((item) => item.category === typeMapping[type])
+                  .map((card) => {
+                    return <PlantCard card={card} />;
+                  })
+              : Array.from(Array(8)).map((_, i) => {
+                  return <Skeleton height="450px" width="320px" />;
+                })}
           </Grid>
         </Grid>
       </Grid>

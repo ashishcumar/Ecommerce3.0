@@ -7,20 +7,15 @@ import { FiPlus } from "react-icons/fi";
 import privacyProtected from "../assets/privacyProtected.png";
 import secureCheckout from "../assets/secureCheckout.png";
 import guarantedSatisfaction from "../assets/guarantedSatisfaction.png";
-import { useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
 import useContractRef from "../customHooks/useContractRef";
 import useShowToast from "../customHooks/useShowToast";
-import { setContractLoading } from "../redux/contractSlice";
 
 function Product({ productData }) {
-  const navigate = useNavigate();
   const { showToast } = useShowToast();
   const { getContract } = useContractRef();
-  const dispatch = useDispatch();
   const [contract, setContract] = useState();
   const [quantity, setQuantity] = useState(1);
-  const { contractLoading } = useSelector((state) => state.contractSlice);
+
   const updateContract = async () => {
     const cnt = await getContract();
     setContract(cnt);
@@ -69,13 +64,14 @@ function Product({ productData }) {
       if (contract) {
         contract.removeAllListeners("AddToCart");
       }
-    }
+    };
   }, [contract]);
 
   const handleAddToCart = async () => {
     try {
+      console.log("handleAddToCart called", contract);
       const transaction = await contract.addToCart(productData.id, quantity);
-      dispatch(setContractLoading(true));
+      // dispatch(setContractLoading(true));
       console.log("handleAddToCart -->", transaction);
     } catch (error) {
       console.log(error);
@@ -119,9 +115,19 @@ function Product({ productData }) {
     }
   };
 
+  const stockStr = () => {
+    if (productData?.stock > 5) {
+      return `Product available: ${productData.stock} units. Hurry, order now while stocks last!`;
+    } else if (productData.stock > 0) {
+      return `Only ${productData?.stock} units left in stock. Order soon before it runs out!`;
+    } else {
+      return "Sorry, this product is currently out of stock.";
+    }
+  };
+
   return (
-    <Grid sx={{ padding: "48px" }}>
-      <Grid sx={{ gridTemplateColumns: "5fr 5fr" }}>
+    <Grid sx={{ padding: ["24px", "48px"] }}>
+      <Grid sx={{ gridTemplateColumns: ["1fr", "5fr 5fr"] }}>
         <Box
           sx={{
             background: "#fcfcfc",
@@ -134,10 +140,10 @@ function Product({ productData }) {
             style={{ height: "500px", objectFit: "contain", margin: "auto" }}
           />
         </Box>
-        <Box sx={{ padding: "24px" }}>
+        <Box sx={{ padding:["12px", "24px"] }}>
           <Text
             sx={{
-              fontSize: "28px",
+              fontSize:["24px","28px"],
               fontWeight: "600",
               color: shades.text_dark,
             }}
@@ -146,17 +152,13 @@ function Product({ productData }) {
           </Text>
           <Text
             sx={{
-              fontSize: "16px",
+              fontSize:["14px", "16px"],
               fontWeight: "600",
               color: productData?.stock > 0 ? shades.tertiary : "red",
               marginBottom: "12px",
             }}
           >
-            {productData?.stock > 5
-              ? `Product available: ${productData.stock} units. Hurry, order now while stocks last!`
-              : productData > 0
-              ? `Only ${productData?.stock} units left in stock. Order soon before it runs out!`
-              : "Sorry, this product is currently out of stock."}
+            {stockStr()}
           </Text>
           <Flex sx={{ gap: "8px", alignItems: "center", marginBottom: "12px" }}>
             <img
@@ -231,10 +233,10 @@ function Product({ productData }) {
                 borderRadius: "0",
               }}
               // onClick={async () =>
-               
+
               // }
             >
-
+              Buy Now
             </Button>
           </Flex>
           <Flex sx={{ gap: "24px", margin: "24px 0 24px 0" }}>
@@ -252,7 +254,7 @@ function Product({ productData }) {
           </Flex>
           <Text
             sx={{
-              fontSize: "28px",
+              fontSize:["24px","28px"],
               fontWeight: "600",
               color: shades.text_dark,
               margin: "24px 0 12px 0",
@@ -260,7 +262,7 @@ function Product({ productData }) {
           >
             Product Summary
           </Text>
-          <Text>
+          <Text sx={{ fontSize:["14px", "16px"], fontWeight: "400" }}>
             Discover the essence of nature with our exquisite collection of
             plants. Each plant in our store is meticulously curated to bring
             life and beauty to your space. Whether you're looking to brighten a

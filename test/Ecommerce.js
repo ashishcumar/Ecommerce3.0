@@ -20,6 +20,7 @@ describe("Ecommerce", function () {
 
   beforeEach(async () => {
     [deployer, buyer] = await ethers.getSigners();
+    console.log("deployer and Buyer", {deployer}, {buyer});
     const Ecommerce = await ethers.getContractFactory("Ecommerce");
     ecommerce = await Ecommerce.deploy();
   });

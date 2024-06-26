@@ -11,7 +11,7 @@ function Footer() {
     <Grid
       sx={{
         background: "white",
-        padding: "48px 48px 24px 48px",
+        padding: ["24px", "48px 48px 24px 48px"],
       }}
     >
       <Grid
@@ -19,7 +19,7 @@ function Footer() {
           gridTemplateColumns: ["repeat(1,1fr)", "repeat(4,1fr)"],
         }}
       >
-        <Box sx={{ padding: "24px" }}>
+        <Box sx={{ padding: ["4px 12px", "24px"] }}>
           <img
             src={logo}
             alt="logo"
@@ -35,7 +35,7 @@ function Footer() {
             Fresh. Green. Home
           </Text>
         </Box>
-        <Box sx={{ padding: "24px" }}>
+        <Box sx={{ padding: ["4px 12px", "24px"] }}>
           {["Succulents", "House Plants", "Indoor Decor", "Air Purifying"].map(
             (item) => {
               return (
@@ -54,7 +54,7 @@ function Footer() {
             }
           )}
         </Box>
-        <Box sx={{ padding: "24px" }}>
+        <Box sx={{ padding: ["4px 12px", "24px"] }}>
           {["Privacy Policy", "Refund", "Shipping"].map((item) => {
             return (
               <Text
@@ -71,7 +71,7 @@ function Footer() {
             );
           })}
         </Box>
-        <Box sx={{ padding: "24px" }}>
+        <Box sx={{ padding: ["4px 12px", "24px"] }}>
           {[
             {
               icon: <HiBuildingOffice />,

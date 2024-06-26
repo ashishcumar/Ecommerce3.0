@@ -8,6 +8,8 @@ export const contractSlice = createSlice({
     contractAbi: null,
     contractAddress: null,
     contractLoading: false,
+    contractOwner:null,
+    isWeb3: false,
   },
   reducers: {
     setAccount: (state, action) => {
@@ -29,6 +31,13 @@ export const contractSlice = createSlice({
     setContractLoading: (state, action) => {
       state.contractLoading = action.payload;
     },
+    setContractOwner: (state, action) => {
+      state.contractOwner = action.payload;
+    },
+
+    setIsWeb3: (state, action) => {
+      state.isWeb3 = action.payload;
+    },
   },
 });
 
@@ -38,5 +47,7 @@ export const {
   setContractAbi,
   setContractAddress,
   setContractLoading,
+  setContractOwner,
+  setIsWeb3,
 } = contractSlice.actions;
 export default contractSlice.reducer;

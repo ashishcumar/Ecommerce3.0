@@ -21,7 +21,11 @@ const useShowToast = () => {
     });
   };
 
-  return { showToast };
+  const closeAllToasts = () => {
+    toast.closeAll();
+  };
+
+  return { showToast, closeAllToasts };
 };
 
 export default useShowToast;

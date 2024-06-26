@@ -5,7 +5,6 @@ const tokens = (n) => {
   return ethers.parseUnits(n.toString(), "ether");
 };
 module.exports = buildModule("Ecommerce", (m) => {
-  console.log(m)
   const ecommerce = m.contract("Ecommerce", []);
 
   plantJson.forEach((item) => {

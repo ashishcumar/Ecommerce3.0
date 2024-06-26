@@ -15,15 +15,18 @@ import {
   setAccount,
   setContractAbi,
   setContractAddress,
+  setContractOwner,
+  setIsWeb3,
   setProducts,
 } from "./redux/contractSlice";
 import { parseToObject } from "./customHooks/contractUtilis";
 
 function App() {
-  const { showToast } = useShowToast();
+  const { showToast, closeAllToasts } = useShowToast();
   const dispatch = useDispatch();
 
   const connectWallet = async (_provider) => {
+    console.log("connectWallet");
     if (!window.ethereum) return;
     if (!_provider) return;
     // Requesting to connect
@@ -37,13 +40,12 @@ function App() {
       window.location.reload();
     });
     const signer = await _provider.getSigner();
-    console.log('signer',signer)
     const address = await signer.getAddress();
     dispatch(setAccount(address));
-    const contractAddress = "0x162A433068F51e18b7d13932F27e66a3f99E6890";
+    const contractAddress = "0xD3D960E7F27F799537AEC6CC699603c7FdB896F8";
     const contrt = new ethers.Contract(contractAddress, Ecommerce.abi, signer);
     const contractOwner = await contrt.owner();
-    console.log({ contractOwner });
+    dispatch(setContractOwner(contractOwner));
     dispatch(setContractAddress(JSON.parse(JSON.stringify(contrt)).target));
     dispatch(setContractAbi(Ecommerce.abi));
     const itemsCount = await contrt.itemCount();
@@ -69,10 +71,15 @@ function App() {
   };
 
   useEffect(() => {
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    if (provider) {
-      connectWallet(provider);
+    if (window.ethereum) {
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      if (provider) {
+        setIsWeb3(true);
+        connectWallet(provider);
+      }
     } else {
+      dispatch(setIsWeb3(false));
+      closeAllToasts();
       showToast({
         title: "Error!",
         description: "MetaMask is not installed.",

@@ -21,11 +21,12 @@ function Navbar() {
     "House Plants": "/category/house-plants",
     "Office Plants": "/category/office-plants",
   };
-  const { account, contractAddress } = useSelector(
+  const { account, contractAddress,contractOwner } = useSelector(
     (state) => state.contractSlice
   );
 
   const updateContract = async () => {
+    
     const cnt = await getContract();
     setContract(cnt);
     return cnt;
@@ -34,11 +35,12 @@ function Navbar() {
   const getContractBalance = async () => {
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
-      const b = await provider.getBalance(contractAddress);
+      if (account === contractOwner) {
+        const b = await provider.getBalance(contractAddress);
+        setContractBalance(Math.floor(weiToEth(b)));
+      }
       const c = await provider.getBalance(account);
-      setContractBalance(Math.floor(weiToEth(b)));
       setUserAccountBalance(Math.floor(weiToEth(c)));
-      console.log({ b, c });
     } catch (error) {
       console.log("getContractBalance --> error", error);
     }
@@ -47,7 +49,6 @@ function Navbar() {
   const withdraw = async () => {
     try {
       const a = await contract.withdraw();
-      console.log(a);
     } catch (error) {
       console.log("withdraw --> error", error);
     }
@@ -55,7 +56,9 @@ function Navbar() {
 
   useEffect(() => {
     updateContract();
-    getContractBalance();
+    if (contractAddress && account) {
+      getContractBalance();
+    }
   }, []);
 
   return (
@@ -147,29 +150,31 @@ function Navbar() {
               {userAccountBalance}
             </Box>
           </Box>
-          <Box
-            sx={{ cursor: "pointer", position: "relative" }}
-            onClick={withdraw}
-          >
-            <PiHandWithdraw fontSize={"28px"} />
+          {account === contractOwner ? (
             <Box
-              sx={{
-                background: shades.primary,
-                color: "white",
-                position: "absolute",
-                fontSize: "12px",
-                fontWeight: "500",
-                borderRadius: "4px",
-                padding: "0px 4px",
-                display: "grid",
-                placeContent: "center",
-                top: "-12px",
-                left: "-10px",
-              }}
+              sx={{ cursor: "pointer", position: "relative" }}
+              onClick={withdraw}
             >
-              {contractBalance}
+              <PiHandWithdraw fontSize={"28px"} />
+              <Box
+                sx={{
+                  background: shades.primary,
+                  color: "white",
+                  position: "absolute",
+                  fontSize: "12px",
+                  fontWeight: "500",
+                  borderRadius: "4px",
+                  padding: "0px 4px",
+                  display: "grid",
+                  placeContent: "center",
+                  top: "-12px",
+                  left: "-10px",
+                }}
+              >
+                {contractBalance}
+              </Box>
             </Box>
-          </Box>
+          ) : null}
         </Flex>
       </Flex>
       <Flex

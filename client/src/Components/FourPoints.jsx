@@ -7,22 +7,30 @@ function FourPoints() {
   return (
     <Flex
       sx={{
-        padding: "48px",
+        padding: ["24px", "48px"],
         background: shades.secondary,
         flexWrap: "wrap",
         justifyContent: "space-between",
         alignItems: "center",
-        gap:'12px'
+        gap: "12px",
       }}
     >
       {fourPointsData.map((data) => {
         return (
-          <Grid sx={{ gridTemplateColumns: "4fr 6fr",padding:'12px',background:'white' }} key={data.text}>
-            <Flex sx={{alignItems:'center'}}>
+          <Grid
+            sx={{
+              gridTemplateColumns: "4fr 6fr",
+              padding: "12px",
+              background: "white",
+              width: ["100%", "fit-content"],
+            }}
+            key={data.text}
+          >
+            <Flex sx={{ alignItems: "center" }}>
               <img
                 src={data.image}
                 alt={data.text}
-                style={{ height: "60px", width: "60px",margin:'auto' }}
+                style={{ height: "60px", width: "60px", margin: "auto" }}
               />
             </Flex>
             <Box>
@@ -40,7 +48,7 @@ function FourPoints() {
                 sx={{
                   fontSize: "18px",
                   fontWeight: "500",
- 
+
                   color: shades.text_dark,
                 }}
               >
