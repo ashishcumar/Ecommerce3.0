@@ -37,7 +37,7 @@ jobs:
           cd ..
 
       - name: Deploy using lowply/deploy-firebase
-            uses: lowply/deploy-firebase@v0.0.5  # Replace with the latest version if needed
-            with:
-              firebase-token: ${{ secrets.FIREBASE_TOKEN }}
-              firebase-project: name-of-the-project
+          uses: lowply/deploy-firebase@v0.0.5
+          with:
+            firebase-token: ${{ secrets.FIREBASE_TOKEN }}
+            firebase-project: name-of-the-project
