@@ -37,4 +37,6 @@ jobs:
           cd ..
 
       - name: Deploy to Firebase Hosting
-        run: firebase deploy --only hosting --token "${{ secrets.FIREBASE_TOKEN }}"
+        run: |
+          firebase login:ci --token "${{ secrets.FIREBASE_TOKEN }}" --debug
+          firebase deploy --only hosting --token "${{ secrets.FIREBASE_TOKEN }}" --debug
