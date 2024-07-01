@@ -15,11 +15,11 @@ By leveraging blockchain technology, Plant Store 3.0 ensures:
 
 URL:- https://plantstore3-0.web.app
 
-![Landing Section](https://file%2B.vscode-resource.vscode-cdn.net/Users/zopper/Desktop/solidity/Ecommerce3.0/client/src/assets/readme/landingPage.png?version%3D1719823055804)
+![Landing Section](client/src/assets/readme/landingPage.png)
 
-![Product Section](https://file%2B.vscode-resource.vscode-cdn.net/Users/zopper/Desktop/solidity/Ecommerce3.0/client/src/assets/readme/prodSection.png?version%3D1719823221470)
+![Product Section](client/src/assets/readme/prodSection.png)
 
-![Product Page](https://file%2B.vscode-resource.vscode-cdn.net/Users/zopper/Desktop/solidity/Ecommerce3.0/client/src/assets/readme/productPageImg.png?version%3D1719823059017)
+![Product Page](client/src/assets/readme/productPageImg.png)
 
 ### Key Features
 
