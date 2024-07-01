@@ -15,7 +15,7 @@ const useShowToast = () => {
       title: title,
       description: description,
       status: status,
-      duration: duration ? duration : 3000,
+      duration: duration || 3000,
       isClosable: isClosable ? isClosable : true,
       position: position ? position : "top-right",
     });
