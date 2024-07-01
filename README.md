@@ -12,6 +12,7 @@ By leveraging blockchain technology, Plant Store 3.0 ensures:
 * **Trust**: Decentralized network with no single point of failure
 
 ### Live Demo
+
 URL:- https://plantstore3-0.web.app
 
 ![Landing Section](https://file%2B.vscode-resource.vscode-cdn.net/Users/zopper/Desktop/solidity/Ecommerce3.0/client/src/assets/readme/landingPage.png?version%3D1719823055804)
